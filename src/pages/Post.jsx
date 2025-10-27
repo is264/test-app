@@ -6,6 +6,14 @@ export default function Post() {
   const { id } = useParams();
   const post = posts.find((post) => post.id === parseInt(id));
 
+  if (!post) {
+    return (
+      <div className="w-[800px] mx-auto my-10 text-center text-2xl">
+        記事が見つかりませんでした
+      </div>
+    );
+  }
+
   return (
     <div className="w-[800px] mx-auto my-10 p-4">
       <div>

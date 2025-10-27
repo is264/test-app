@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { posts } from "../data/posts";
 
 export default function Posts() {
@@ -7,7 +8,7 @@ export default function Posts() {
       {posts.map((post) => {
         return (
           <li key={post.id} className="border border-[#ccc] p-4">
-            <a href={`/posts/${post.id}`}>
+            <Link to={`/posts/${post.id}`}>
               <div className="flex justify-between">
                 <div className="text-xs text-[#888888]">
                   {new Date(post.createdAt).toLocaleDateString()}
@@ -30,7 +31,7 @@ export default function Posts() {
                 className="line-clamp-2"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               ></div>
-            </a>
+            </Link>
           </li>
         );
       })}
