@@ -7,28 +7,30 @@ export default function Posts() {
       {posts.map((post) => {
         return (
           <li key={post.id} className="border border-[#ccc] p-4">
-            <div className="flex justify-between">
-              <div className="text-xs text-[#888888]">
-                {new Date(post.createdAt).toLocaleDateString()}
+            <a href={`/posts/${post.id}`}>
+              <div className="flex justify-between">
+                <div className="text-xs text-[#888888]">
+                  {new Date(post.createdAt).toLocaleDateString()}
+                </div>
+                <div className="flex justify-end gap-2">
+                  {post.categories.map((category) => {
+                    return (
+                      <span
+                        key={category}
+                        className="text-xs text-[#0066cc] border border-[#0066cc] rounded-sm px-2 py-1"
+                      >
+                        {category}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
-              <div className="flex justify-end gap-2">
-                {post.categories.map((category) => {
-                  return (
-                    <span
-                      key={category}
-                      className="text-xs text-[#0066cc] border border-[#0066cc] rounded-sm px-2 py-1"
-                    >
-                      {category}
-                    </span>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="text-2xl mt-2 mb-4">{post.title}</div>
-            <div
-              className="line-clamp-2"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            ></div>
+              <div className="text-2xl mt-2 mb-4">{post.title}</div>
+              <div
+                className="line-clamp-2"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              ></div>
+            </a>
           </li>
         );
       })}
