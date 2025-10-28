@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { posts } from "../data/posts";
+import { API_BASE_URL } from "../const";
 
 export default function Post() {
   const { id } = useParams();
-  const post = posts.find((post) => post.id === parseInt(id));
+  const [post, setPost] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  if (!post) {
+  useEffect(() => {
+    const fetcher = async () => {
+      const res = await fetch(`${API_BASE_URL}/posts/${id}`);
+      const data = await res.json();
+      setPost(data.post);
+      setIsLoading(false);
+    };
+    fetcher();
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <div className="w-[800px] mx-auto my-10 text-center text-2xl">
+        読込中...
+      </div>
+    );
+  }
+
+  if (!isLoading && !post) {
     return (
       <div className="w-[800px] mx-auto my-10 text-center text-2xl">
         記事が見つかりませんでした
