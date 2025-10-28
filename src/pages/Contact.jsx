@@ -44,11 +44,11 @@ export default function Contact() {
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
     try {
       // 入力フォームのバリデーション
       contactSchema.parse(form);
+      setIsSubmitting(true);
       // 入力フォーム送信
       await fetch(`${API_BASE_URL}/contacts`, {
         method: "POST",
